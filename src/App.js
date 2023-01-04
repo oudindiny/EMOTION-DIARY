@@ -16,10 +16,15 @@ function App() {
   return (
     <BrowserRouter>
     <div className="App">
-      <MyHeader headText={"App"} />
+      <MyHeader 
+      headText={"App"} 
+      leftChild={
+        <MyButton text={"왼쪽버튼"} onClick={ () => alert("왼쪽클릭")} />}
+      rightChild={
+        <MyButton text={"오른쪽버튼"} onClick={ () => alert("오른쪽클릭")} />
+      }/>
+      
       <h2>App.js</h2>
-
-
       <MyButton 
         text={"버튼"}
         onClick={()=> alert("버튼 클릭")}
@@ -36,7 +41,6 @@ function App() {
         
       />
       
-
       <Routes>
         <Route path='/' element = {<Home />} />
         <Route path='/new' element = {<New />} />
