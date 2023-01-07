@@ -4,6 +4,7 @@ import { DiaryStateContext } from "../App";
 //COMPONENTS
 import MyHeader from "../components/MyHeader";
 import MyButton from "../components/MyButton";
+import DiaryList from "../components/DiaryList";
 
 
 const Home = () => {
@@ -26,8 +27,11 @@ const Home = () => {
                 curDate.getMonth() + 1,
                 0 // 해당 년도 해당 월 마지막일
             ).getTime();
-
-        setData(diaryList.filter( (it) => firstDay <= it.date && it.date <= lastDay) ); //해당 월에 맞는 일기만 추려내기
+            
+            
+        setData(diaryList.filter( 
+            (it) => (firstDay <= it.date && it.date <= lastDay)
+            ) ); //해당 월에 맞는 일기만 추려내기
         }
 
     },[diaryList,curDate]); 
@@ -35,7 +39,7 @@ const Home = () => {
     useEffect( () => {
         console.log(data);
     },[data]);
-
+    
 
     
     const increaseMonth = () =>{  //월 증가 :: header 오른쪽 버튼
@@ -56,6 +60,7 @@ const Home = () => {
             leftChild={<MyButton text={"<"} onClick={decreaseMonth}/>}
             rightChild={<MyButton text={">"} onClick={increaseMonth}/>}
             />
+            <DiaryList diaryList={data}/>
         </div>
     );
     
