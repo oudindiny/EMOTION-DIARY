@@ -13,8 +13,10 @@ const Home = () => {
     const [data, setData] = useState([]);
     const [curDate, setCurDate] = useState(new Date());
     const headText = `${curDate.getFullYear()}년 ${curDate.getMonth() + 1}월` //header에 올라가는 년도와 월
-
+    let dd = [];    
+    
     useEffect( () => {
+        
         if(diaryList.length >= 1) {
             const firstDay = new Date(
                 curDate.getFullYear(),
@@ -27,20 +29,18 @@ const Home = () => {
                 curDate.getMonth() + 1,
                 0 // 해당 년도 해당 월 마지막일
             ).getTime();
-            
-            
-        setData(diaryList.filter( 
-            (it) => (firstDay <= it.date && it.date <= lastDay)
-            ) ); //해당 월에 맞는 일기만 추려내기
-        }
-
+            console.log(typeof(firstDay));
+            console.log(lastDay);
+            setData(diaryList.filter( (it) => (firstDay <= parseInt(it.date) && parseInt(it.date <= lastDay))) ); //해당 월에 맞는 일기만 추려내기
+            }
     },[diaryList,curDate]); 
 
     useEffect( () => {
         console.log(data);
     },[data]);
+    console.log(data);
     
-
+    
     
     const increaseMonth = () =>{  //월 증가 :: header 오른쪽 버튼
         setCurDate(
