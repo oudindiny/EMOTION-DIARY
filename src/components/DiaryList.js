@@ -9,5 +9,8 @@ const DiaryList = ({diaryList}) => {
         </div>
     );
 };
+DiaryList.defaultProps = {
+    diaryList: [],
+}
 
 export default DiaryList;

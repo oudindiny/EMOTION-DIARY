@@ -12,11 +12,9 @@ const Home = () => {
     //console.log(diaryList);
     const [data, setData] = useState([]);
     const [curDate, setCurDate] = useState(new Date());
-    const headText = `${curDate.getFullYear()}년 ${curDate.getMonth() + 1}월` //header에 올라가는 년도와 월
-    let dd = [];    
-    
+    const headText = `${curDate.getFullYear()}년 ${curDate.getMonth() + 1} 월` //header에 올라가는 년도와 월
+     
     useEffect( () => {
-        
         if(diaryList.length >= 1) {
             const firstDay = new Date(
                 curDate.getFullYear(),
@@ -29,16 +27,18 @@ const Home = () => {
                 curDate.getMonth() + 1,
                 0 // 해당 년도 해당 월 마지막일
             ).getTime();
-            console.log(typeof(firstDay));
-            console.log(lastDay);
-            setData(diaryList.filter( (it) => (firstDay <= parseInt(it.date) && parseInt(it.date <= lastDay))) ); //해당 월에 맞는 일기만 추려내기
+            
+            setData(
+                diaryList.filter((it) => firstDay <= it.date && it.date <= lastDay)
+            ); //해당 월에 맞는 일기만 추려내기
+            
             }
     },[diaryList,curDate]); 
 
     useEffect( () => {
         console.log(data);
     },[data]);
-    console.log(data);
+    
     
     
     
