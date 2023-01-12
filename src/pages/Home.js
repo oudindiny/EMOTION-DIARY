@@ -18,7 +18,7 @@ const Home = () => {
         if(diaryList.length >= 1) {
             const firstDay = new Date(
                 curDate.getFullYear(),
-                curDate.getMonth() + 1,
+                curDate.getMonth(),
                 1 // 해당 년도 해당 월 1일
             ).getTime();
 
@@ -28,8 +28,10 @@ const Home = () => {
                 0 // 해당 년도 해당 월 마지막일
             ).getTime();
             
+
+
             setData(
-                diaryList.filter((it) => firstDay <= it.date && it.date <= lastDay)
+                  diaryList.filter((it) => new Date(firstDay) <= it.date && it.date <= new Date(lastDay))
             ); //해당 월에 맞는 일기만 추려내기
             
             }
