@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 // components
 import MyHeader from "./MyHeader";
@@ -39,8 +39,14 @@ const getStringDate = (date) => {
 };
 
 const DiaryEditor = () => {
-  const navigate = useNavigate();
+  const contentRef = useRef();
+  const [content, setContent] = useState(" ");
+  const [emotion, setEmotion] = useState(3);
   const [date, setDate] = useState(getStringDate(new Date()));
+  const navigate = useNavigate();
+  const handleClickEmote = (emotion) => {
+    setEmotion(emotion);
+  };
   return (
     <div>
       <MyHeader
@@ -67,8 +73,35 @@ const DiaryEditor = () => {
           <h4>오늘의 감정</h4>
           <div className="input_box emotion_list_wrapper">
             {emotionList.map((it) => (
-              <EmotionItem key={it.emotion_id} {...it} />
+              <EmotionItem
+                key={it.emotion_id}
+                {...it}
+                onClick={handleClickEmote}
+                isSelected={it.emotion_id === emotion}
+              />
             ))}
+          </div>
+        </section>
+        <section>
+          <h4>오늘의 일기</h4>
+          <div className="input_box text_wrapper">
+            <textarea
+              placeholder="오늘은 어땠나요?"
+              ref={contentRef}
+              onChange={(e) => setContent(e.target.value)}
+              value={content}
+            />
+          </div>
+        </section>
+        <section>
+          <div className="control_box">
+            <MyButton
+              text={"취소하기"}
+              onClick={() => {
+                navigate(-1);
+              }}
+            />
+            <MyButton text={"작성하기"} type={"positive"} onClick={(e) => {}} />
           </div>
         </section>
       </div>
