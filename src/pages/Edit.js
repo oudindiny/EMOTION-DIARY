@@ -1,36 +1,29 @@
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useContext, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import DiaryStateContext from "../App";
 
 const Edit = () => {
-    const navigate = useNavigate();
-    const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
+  const { id } = useParams();
 
-    const id = searchParams.get("id");
-    console.log("id : ", id);
+  const diaryList = useContext(DiaryStateContext);
+  console.log(id);
+  console.log(diaryList);
 
-    const mode = searchParams.get("mode");
-    console.log("mode : ", mode);
+  useEffect(() => {
+    if (diaryList.length >= 1) {
+      const targetDiary = diaryList.find(
+        (it) => parseInt(it.id) === parseInt(id)
+      );
+      console.log(targetDiary);
+    }
+  }, [id, diaryList]);
 
-    
-
-    return(
-        <div>
-        <h1>Edit</h1>
-        <p>이 곳은 일기 수정페이지 입니다.</p>
-        <button onClick={ () => setSearchParams({ who: 'yujin' })}> who 값으로 변경 </button>
-        <button onClick={ () => {
-            navigate("/home");
-        }}
-        >
-            홈으로 가기
-        </button>
-        <button onClick={ () => {
-            navigate(-1);
-        }}
-        >
-            뒤로 가기
-        </button>
+  return (
+    <div>
+      <h2>Edit</h2>
     </div>
-    );
+  );
 };
 
 export default Edit;
