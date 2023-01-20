@@ -1,30 +1,30 @@
-import './App.css';
-import React, { useReducer, useRef } from 'react';
-import { BrowserRouter, Route, Routes} from 'react-router-dom';
+import "./App.css";
+import React, { useReducer, useRef } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-
-import Home from './pages/Home';
-import New from './pages/New';
-import Diary from './pages/Diary';
-import Edit from './pages/Edit';
-
+import Home from "./pages/Home";
+import New from "./pages/New";
+import Diary from "./pages/Diary";
+import Edit from "./pages/Edit";
 
 const reducer = (state, action) => {
   let newState = [];
-  switch(action.type){
-    case 'INIT':{
+  switch (action.type) {
+    case "INIT": {
       return action.data;
     }
-    case 'CREATE' :{
+    case "CREATE": {
       newState = [action.data, ...state];
       break;
     }
-    case 'REMOVE' :{
-      newState = state.filter((it)=> it.id !== action.targetId);
+    case "REMOVE": {
+      newState = state.filter((it) => it.id !== action.targetId);
       break;
     }
-    case 'EDIT' :{
-      newState = state.filter((it) => it.id === action.data.id ? {...action.data} : it);
+    case "EDIT": {
+      newState = state.filter((it) =>
+        it.id === action.data.id ? { ...action.data } : it
+      );
       break;
     }
     default:
@@ -67,10 +67,9 @@ const dummyData = [
     content: "오늘일기 5번",
     date: 1672986674320,
   },
-]
+];
 
 function App() {
-
   const [data, dispatch] = useReducer(reducer, dummyData);
 
   const dataId = useRef(0);
