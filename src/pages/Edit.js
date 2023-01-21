@@ -1,6 +1,6 @@
 import { useContext, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import DiaryStateContext from "../App";
+import { DiaryStateContext } from "../App";
 
 const Edit = () => {
   const navigate = useNavigate();
@@ -16,6 +16,11 @@ const Edit = () => {
         (it) => parseInt(it.id) === parseInt(id)
       );
       console.log(targetDiary);
+
+      if (targetDiary) {
+      } else {
+        navigate("/", { replace: true });
+      } //일기가 없으면 홈으로 돌아가게
     }
   }, [id, diaryList]);
 
