@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useContext, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { DiaryDispatchContext } from "./../App";
 
 // components
@@ -39,7 +39,7 @@ const getStringDate = (date) => {
   return date.toISOString().slice(0, 10); //ISO형식의 문자열 반환 YYYY-MM-DD형식으로 9번째 자리까지만 자름
 };
 
-const DiaryEditor = () => {
+const DiaryEditor = ({ isEdit, originData }) => {
   const contentRef = useRef();
 
   const [content, setContent] = useState(" ");
@@ -47,7 +47,7 @@ const DiaryEditor = () => {
   const [date, setDate] = useState(getStringDate(new Date()));
 
   const navigate = useNavigate();
-  const { onCreate } = useContext(DiaryDispatchContext);
+  const { onCreate, onEdit } = useContext(DiaryDispatchContext);
   const handleClickEmote = (emotion) => {
     setEmotion(emotion);
   };
@@ -56,13 +56,29 @@ const DiaryEditor = () => {
     if (content.length < 1) {
       contentRef.current.focus();
     }
-    onCreate(date, content, emotion);
+    if (
+      window.confirm(
+        isEdit ? "일기를 수정하시겠습니까?" : "새로운 일기를 작성 하시겠습니까?"
+      )
+    ) {
+      onCreate(date, content, emotion);
+    } else {
+      onEdit(originData.id, date, content, emotion);
+    }
+
     navigate("/", { replace: true });
   };
+  useEffect(() => {
+    if (isEdit) {
+      setDate(getStringDate(new Date(parseInt(originData.date))));
+      setEmotion(originData.emotion);
+      setContent(originData.content);
+    }
+  }, [isEdit, originData]);
   return (
     <div>
       <MyHeader
-        headText={"새 일기쓰기"}
+        headText={isEdit ? "일기 수정하기" : "새 일기쓰기"}
         leftChild={
           <MyButton text={" < 뒤로가기 "} onClick={() => navigate(-1)} />
         }
