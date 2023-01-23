@@ -22,6 +22,7 @@ const Edit = () => {
       if (targetDiary) {
         setOriginData(targetDiary);
       } else {
+        alert("없는 일기 입니다");
         navigate("/", { replace: true });
       } //일기가 없으면 홈으로 돌아가게
     }
