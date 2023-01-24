@@ -68,7 +68,8 @@ body {
 header {
   padding-left: 20px;
   padding-right: 20px;
-
+  padding-top: 10px;
+  padding-bottom: 10px;
   display: flex;
   align-items: center;
   border-bottom: 1px solid #e2e2e2;
@@ -241,4 +242,57 @@ header button {
   background-color: #ffdd67;
   color: white;
   text-shadow: 1px 1px 2px rgb(75, 75, 75);
+}
+
+/* Dairy */
+.DiaryPage {
+}
+.DiaryPage section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.DiaryPage h4 {
+  font-size: 22px;
+  font-weight: bold;
+  background-color: #ffdd67;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+.DiaryPage .diary_img_wrapper {
+  background-color: #ffdd67;
+  width: 250px;
+  height: 250px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  box-shadow: 1px 1px 5px rgb(75, 75, 75);
+}
+.DiaryPage .diary_img_wrapper img {
+  width: 170px;
+}
+.DiaryPage .emotion_descript {
+  font-size: 20px;
+  padding-top: 10px;
+  padding-bottom: 30px;
+}
+.DiaryPage .diary_content_wrapper {
+  width: 100%;
+  background-color: #ececec;
+  border-radius: 5px;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+.DiaryPage .diary_content_wrapper p {
+  padding: 20px;
+  text-align: left;
+  font-size: 20px;
+  font-family: "Yeon Sung";
+  font-weight: 400;
+  line-height: 2.5;
 }
