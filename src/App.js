@@ -72,7 +72,7 @@ const dummyData = [
 function App() {
   const [data, dispatch] = useReducer(reducer, dummyData);
 
-  const dataId = useRef(0);
+  const dataId = useRef(6); //더미데이터가 5까지 있어서 6으로 초기값
   // CREATE
   const onCreate = (date, content, emotion) => {
     dispatch({
